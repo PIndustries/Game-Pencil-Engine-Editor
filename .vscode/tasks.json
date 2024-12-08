@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "g++ -std=c++11 -I/opt/homebrew/include -L/opt/homebrew/lib -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf src/*.cpp src/gpe/*.cpp src/gpe_editor/*.cpp src/pawgui/*.cpp src/sdl2_module/*.cpp src/sdl2_module/thirdparty/*.cpp src/other_libs/*.cpp -o GamePencil && echo 'Build Complete!'"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "reveal": "always"
+            },
+            "windows": {
+                "args": [
+                    "-c",
+                    "g++ -std=c++11 -IC:/MinGW/include -LC:/MinGW/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf src/*.cpp src/gpe/*.cpp src/gpe_editor/*.cpp src/pawgui/*.cpp src/sdl2_module/*.cpp src/sdl2_module/thirdparty/*.cpp src/other_libs/*.cpp -o GamePencil.exe && echo 'Build Complete!'"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "-c",
+                    "g++ -std=c++11 -I/opt/homebrew/include -L/opt/homebrew/lib -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf src/*.cpp src/gpe/*.cpp src/gpe_editor/*.cpp src/pawgui/*.cpp src/sdl2_module/*.cpp src/sdl2_module/thirdparty/*.cpp src/other_libs/*.cpp -o GamePencil && echo 'Build Complete!' && osascript -e 'display notification \"GamePencil Engine\" with title \"Editor Build Complete\"'"
+                ]
+            },
+            "linux": {
+                "args": [
+                    "-c",
+                    "g++ -std=c++11 -I/usr/include -L/usr/lib -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf src/*.cpp src/gpe/*.cpp src/gpe_editor/*.cpp src/pawgui/*.cpp src/sdl2_module/*.cpp src/sdl2_module/thirdparty/*.cpp src/other_libs/*.cpp -o GamePencil && echo 'Build Complete!'"
+                ]
+            }
+        }
+    ]
+}
