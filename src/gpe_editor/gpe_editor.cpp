@@ -37,7 +37,6 @@ SOFTWARE.
 #include "gpe_project_resources.h"
 #include "gpe_cpp_builder_settings.h"
 #include "gpe_gamepad_tester.h"
-// Ensure you have these includes at the top of your file
 #include <algorithm> // For std::max
 #include <string>
 
@@ -62,8 +61,6 @@ std::string join_paths(const std::string& path1, const std::string& path2)
     joined += path2;
     return joined;
 }
-
-
 
 GPE_Gui_Engine * editor_gui_main = nullptr;
 
