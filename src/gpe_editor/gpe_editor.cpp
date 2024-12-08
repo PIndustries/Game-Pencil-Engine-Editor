@@ -37,6 +37,32 @@ SOFTWARE.
 #include "gpe_project_resources.h"
 #include "gpe_cpp_builder_settings.h"
 #include "gpe_gamepad_tester.h"
+// Ensure you have these includes at the top of your file
+#include <algorithm> // For std::max
+#include <string>
+
+// Define the PATH_SEPARATOR based on the OS
+#ifdef _WIN32
+    const char PATH_SEPARATOR = '\\';
+#else
+    const char PATH_SEPARATOR = '/';
+#endif
+
+// Utility function to join two paths
+std::string join_paths(const std::string& path1, const std::string& path2)
+{
+    if (path1.empty()) return path2;
+    if (path2.empty()) return path1;
+
+    std::string joined = path1;
+    if (joined.back() != PATH_SEPARATOR)
+    {
+        joined += PATH_SEPARATOR;
+    }
+    joined += path2;
+    return joined;
+}
+
 
 
 GPE_Gui_Engine * editor_gui_main = nullptr;
@@ -851,131 +877,131 @@ void GPE_Gui_Engine::launch_new_project()
     std::string newProjectName = "";
     std::string foundFileName = "";
     pawgui::resource_dragged = nullptr;
-    if( editor_gui_main!=nullptr && gpe::renderer_main!=nullptr)
+
+    if (editor_gui_main != nullptr && gpe::renderer_main != nullptr)
     {
         gpe::error_log->report("Launching New Project");
         std::string popUpCaption = "Launch New Project";
-        gpe::cursor_main_controller->cursor_change( gpe::cursor_main_controller->cursor_system_name( gpe::cursor_default_type::arrow) );
+        gpe::cursor_main_controller->cursor_change(gpe::cursor_main_controller->cursor_system_name(gpe::cursor_default_type::arrow));
         editor_gui_main->reset_gui_info();
-        pawgui::main_overlay_system->take_frozen_screenshot( );
+        pawgui::main_overlay_system->take_frozen_screenshot();
 
         int promptBoxWidth = gpe::settings->minWindowWidth;
         int promptBoxHeight = gpe::settings->minWindowHeight;
         gpe::shape_rect widget_box;
 
-
         gpe::input->reset_all_input();
         int currentTipId = editor_gui_main->get_random_tip();
-        if( currentTipId < 0 || currentTipId > editor_gui_main->get_tip_count() )
+        if (currentTipId < 0 || currentTipId > editor_gui_main->get_tip_count())
         {
             currentTipId = 0;
         }
         std::string currentTipstring = editor_gui_main->get_tip(currentTipId);
 
-        pawgui::widget_label_title * mainMenuLabel = new pawgui::widget_label_title("Create A Project?","Create A Project");
-        pawgui::widget_label_text  * projectLocationLabel = new pawgui::widget_label_text ("Project Location:","Project Location:");
-        pawgui::widget_label_text  * projectNameLabel = new pawgui::widget_label_text ("Project Name:","Project Name:");
+        pawgui::widget_label_title* mainMenuLabel = new pawgui::widget_label_title("Create A Project?", "Create A Project");
+        pawgui::widget_label_text* projectLocationLabel = new pawgui::widget_label_text("Project Location:", "Project Location:");
+        pawgui::widget_label_text* projectNameLabel = new pawgui::widget_label_text("Project Name:", "Project Name:");
 
-        pawgui::widget_label_text  * projectMainExportLabel = new pawgui::widget_label_text ("Primary Export Target:","Primary Export Target:");
-        pawgui::widget_label_text  * projectMainLanguageLabel = new pawgui::widget_label_text ("Programming Language:","Programming Language:");
-        int biggerLabelSize = std::max( projectMainExportLabel->get_width(), projectMainLanguageLabel->get_width() );
-        biggerLabelSize = std::max( biggerLabelSize, projectNameLabel->get_width() );
+        pawgui::widget_label_text* projectMainExportLabel = new pawgui::widget_label_text("Primary Export Target:", "Primary Export Target:");
+        pawgui::widget_label_text* projectMainLanguageLabel = new pawgui::widget_label_text("Programming Language:", "Programming Language:");
+        int biggerLabelSize = std::max(projectMainExportLabel->get_width(), projectMainLanguageLabel->get_width());
+        biggerLabelSize = std::max(biggerLabelSize, projectNameLabel->get_width());
         projectMainExportLabel->set_width(biggerLabelSize);
         projectNameLabel->set_width(biggerLabelSize);
         projectMainLanguageLabel->set_width(biggerLabelSize);
 
-        //Adds all available languages to drop down menu
-        pawgui::widget_dropdown_menu * newprojectLanguage = new pawgui::widget_dropdown_menu( "Project Language",true);
+        // Adds all available languages to drop down menu
+        pawgui::widget_dropdown_menu* newprojectLanguage = new pawgui::widget_dropdown_menu("Project Language", true);
         int addedLanguages = 0;
-        if( pawgui::main_syntax_highlighter!=nullptr )
+        if (pawgui::main_syntax_highlighter != nullptr)
         {
-            //short operation so not "optimized"
-            pawgui::syntax_language * tLanguage  = nullptr;
-            int languageCount = (int)pawgui::main_syntax_highlighter->get_language_count();
+            // Short operation so not "optimized"
+            pawgui::syntax_language* tLanguage = nullptr;
+            int languageCount = static_cast<int>(pawgui::main_syntax_highlighter->get_language_count());
 
-            for( int cLanguage = 0; cLanguage < languageCount; cLanguage++ )
+            for (int cLanguage = 0; cLanguage < languageCount; cLanguage++)
             {
-                tLanguage = pawgui::main_syntax_highlighter->get_language_object( cLanguage);
-                if( tLanguage!=nullptr && tLanguage->isCodingLanguage)
+                tLanguage = pawgui::main_syntax_highlighter->get_language_object(cLanguage);
+                if (tLanguage != nullptr && tLanguage->isCodingLanguage)
                 {
-                    newprojectLanguage->add_menu_option(tLanguage->languageName+" ("+tLanguage->languageShortName+")",tLanguage->languageShortName,cLanguage,true);
+                    newprojectLanguage->add_menu_option(tLanguage->languageName + " (" + tLanguage->languageShortName + ")", tLanguage->languageShortName, cLanguage, true);
                     addedLanguages++;
                 }
             }
         }
-        //In the event something went wrong and we somehow didn't add JS and any other new coding language...
-        if( addedLanguages == 0 )
+        // In the event something went wrong and we somehow didn't add JS and any other new coding language...
+        if (addedLanguages == 0)
         {
-            newprojectLanguage->add_menu_option("JavaScript","JS", pawgui::program_language_js,true);
-            newprojectLanguage->add_menu_option("C++","CPP", pawgui::program_language_cpp,true);
+            newprojectLanguage->add_menu_option("JavaScript", "JS", pawgui::program_language_js, true);
+            newprojectLanguage->add_menu_option("C++", "CPP", pawgui::program_language_cpp, true);
         }
 
-        pawgui::widget_dropdown_menu * newprojectMainExport= new pawgui::widget_dropdown_menu( "Main Export Target",true);
-        newprojectMainExport->add_menu_option("HTML5","HTML5" , gpe::system_os_html5,true);
-        newprojectMainExport->add_menu_option("WINDOWS","WINDOWS", gpe::system_os_windows);
-        newprojectMainExport->add_menu_option("MAC","MAC", gpe::system_os_mac);
-        newprojectMainExport->add_menu_option("LINUX","LINUX", gpe::system_os_linux);
+        pawgui::widget_dropdown_menu* newprojectMainExport = new pawgui::widget_dropdown_menu("Main Export Target", true);
+        newprojectMainExport->add_menu_option("HTML5", "HTML5", gpe::system_os_html5, true);
+        newprojectMainExport->add_menu_option("WINDOWS", "WINDOWS", gpe::system_os_windows);
+        newprojectMainExport->add_menu_option("MAC", "MAC", gpe::system_os_mac);
+        newprojectMainExport->add_menu_option("LINUX", "LINUX", gpe::system_os_linux);
 
+        pawgui::widget_panel_list* popupMenuList = new pawgui::widget_panel_list();
+        pawgui::widget_input_text* projectNameField = new pawgui::widget_input_text("", "New Project");
+        pawgui::widget_label_text* fileToCreateField = new pawgui::widget_label_text("No file selected", "No file selected");
+        fileToCreateField->set_width(gpe::settings->minWindowWidth - 32);
+        pawgui::widget_button_label* close_button = new pawgui::widget_button_label("Cancel", "Cancel");
+        pawgui::widget_button_label* create_button = new pawgui::widget_button_label("Create", "Create");
+        pawgui::widget_checkbox* matchProjectFileName = new pawgui::widget_checkbox("Same as file name", "Makes project name same as file name", true);
+        pawgui::widget_label_error* projectCreateErrorLabel = new pawgui::widget_label_error("Please input all fields above", "");
+        pawgui::widget_button_push* fileFind_button = new pawgui::widget_button_push(gpe::app_directory_name + "resources/gfx/iconpacks/fontawesome/folder.png", "Browse Projects...");
+        fileToCreateField->set_width(gpe::settings->minWindowWidth - 32);
+        gpe::renderer_main->reset_viewpoint();
+        // pawgui::main_overlay_system->render_frozen_screenshot();
 
-        pawgui::widget_panel_list * popupMenuList = new pawgui::widget_panel_list();
-        pawgui::widget_input_text * projectNameField = new pawgui::widget_input_text("","New Project");
-        pawgui::widget_label_text  * fileToCreateField = new pawgui::widget_label_text ("No file selected","No file selected" );
-        fileToCreateField->set_width( gpe::settings->minWindowWidth -32 );
-        pawgui::widget_button_label * close_button = new pawgui::widget_button_label( "Cancel","Cancel");
-        pawgui::widget_button_label * create_button = new pawgui::widget_button_label( "Create","Create");
-        pawgui::widget_checkbox * matchProjectFileName = new pawgui::widget_checkbox("Same as file name","Makes project name same as file name", true );
-        pawgui::widget_label_error * projectCreateErrorLabel = new pawgui::widget_label_error("Please gpe::input all fields above","");
-        pawgui::widget_button_push * fileFind_button = new pawgui::widget_button_push( gpe::app_directory_name+"resources/gfx/iconpacks/fontawesome/folder.png","Browse Projects...");
-        fileToCreateField->set_width( gpe::settings->minWindowWidth -32 );
-        gpe::renderer_main->reset_viewpoint( );
-        //pawgui::main_overlay_system->render_frozen_screenshot( );
-        while(exitOperation==false)
+        while (!exitOperation)
         {
-            gpe::cursor_main_controller->cursor_change( gpe::cursor_main_controller->cursor_system_name( gpe::cursor_default_type::arrow) );
-            //gpe::error_log->report("Processing tip of the day");
+            gpe::cursor_main_controller->cursor_change(gpe::cursor_main_controller->cursor_system_name(gpe::cursor_default_type::arrow));
+            // gpe::error_log->report("Processing tip of the day");
             gpe::game_runtime->start_loop();
 
-            if( gpe::screen_width > gpe::settings->defaultWindowWidth*2 )
+            if (gpe::screen_width > gpe::settings->defaultWindowWidth * 2)
             {
-                promptBoxWidth = gpe::settings->defaultWindowWidth*2;
+                promptBoxWidth = gpe::settings->defaultWindowWidth * 2;
             }
             else
             {
                 promptBoxWidth = gpe::screen_width;
             }
 
-            if( gpe::screen_height > gpe::settings->defaultWindowWidth*2 )
+            if (gpe::screen_height > gpe::settings->defaultWindowWidth * 2)
             {
-                promptBoxHeight = gpe::settings->defaultWindowWidth*2;
+                promptBoxHeight = gpe::settings->defaultWindowWidth * 2;
             }
             else
             {
                 promptBoxHeight = gpe::screen_height;
             }
 
-            widget_box.x = (gpe::screen_width-promptBoxWidth)/2;
-            widget_box.y = (gpe::screen_height-promptBoxHeight)/2;
+            widget_box.x = (gpe::screen_width - promptBoxWidth) / 2;
+            widget_box.y = (gpe::screen_height - promptBoxHeight) / 2;
             widget_box.w = promptBoxWidth;
             widget_box.h = promptBoxHeight;
-            popupMenuList->set_coords(widget_box.x, widget_box.y+32);
+            popupMenuList->set_coords(widget_box.x, widget_box.y + 32);
             popupMenuList->set_width(widget_box.w);
-            popupMenuList->set_height(widget_box.h-32);
+            popupMenuList->set_height(widget_box.h - 32);
             popupMenuList->barXMargin = pawgui::padding_default;
             popupMenuList->barYMargin = pawgui::padding_default;
             popupMenuList->barXPadding = pawgui::padding_default;
             popupMenuList->barYPadding = pawgui::padding_default;
             editor_gui_main->reset_gui_info();
             popupMenuList->clear_list();
-            popupMenuList->add_gui_element(mainMenuLabel,true);
+            popupMenuList->add_gui_element(mainMenuLabel, true);
 
-            popupMenuList->add_gui_element(projectLocationLabel,false);
+            popupMenuList->add_gui_element(projectLocationLabel, false);
             popupMenuList->add_gui_element(fileFind_button, true);
 
-            popupMenuList->add_gui_element(fileToCreateField,true);
+            popupMenuList->add_gui_element(fileToCreateField, true);
             popupMenuList->add_gui_element(matchProjectFileName, true);
 
-            popupMenuList->add_gui_element(projectNameLabel,false);
-            popupMenuList->add_gui_element(projectNameField,true);
+            popupMenuList->add_gui_element(projectNameLabel, false);
+            popupMenuList->add_gui_element(projectNameField, true);
 
             popupMenuList->add_gui_element(projectMainExportLabel, false);
             popupMenuList->add_gui_element(newprojectMainExport, true);
@@ -984,42 +1010,45 @@ void GPE_Gui_Engine::launch_new_project()
             popupMenuList->add_gui_element(newprojectLanguage, true);
 
             popupMenuList->add_gui_element(projectCreateErrorLabel, true);
-            popupMenuList->add_gui_element(create_button,false);
-            popupMenuList->add_gui_element(close_button,false);
+            popupMenuList->add_gui_element(create_button, false);
+            popupMenuList->add_gui_element(close_button, false);
             popupMenuList->process_self();
-            if( gpe::input->check_kb_released(kb_esc) || close_button->is_clicked() )
+
+            if (gpe::input->check_kb_released(kb_esc) || close_button->is_clicked())
             {
                 exitOperation = true;
                 manualCancel = true;
                 newProjectFileName = "";
             }
-            else if( create_button->is_clicked() )
+            else if (create_button->is_clicked())
             {
                 newProjectName = projectNameField->get_string();
-                //Checks if a file is actually here or is it still just a folder...
-                newProjectLocalFileName = stg_ex::get_local_from_global_file( newProjectName );
-                if( (int)newProjectLocalFileName.size() > 0 )
+                // Checks if a file is actually here or is it still just a folder...
+                newProjectLocalFileName = stg_ex::get_local_from_global_file(newProjectName);
+                if (static_cast<int>(newProjectLocalFileName.size()) > 0)
                 {
-                    if( stg_ex::is_alnum(newProjectName,true, true) )
+                    if (stg_ex::is_alnum(newProjectName, true, true))
                     {
                         /*
-                        If the path exists, file name checks, is alpha numeric and such
+                        If the path exists, file name checks, is alphanumeric and such
                         We exit this while loop and skip to end of function ready to create
                         a new project.
                         */
-                        if( sff_ex::path_exists( stg_ex::get_path_from_file(newProjectFileName)  ) )
+                        std::string projectPathStr = stg_ex::get_path_from_file(newProjectFileName);
+                        // Check if the path exists (assuming sff_ex::path_exists can work with string paths)
+                        if (sff_ex::path_exists(projectPathStr))
                         {
                             manualCancel = false;
                             create_buttonPushed = true;
                             exitOperation = true;
                         }
-                        else if( (int)newProjectFileName.size() > 0 )
+                        else if (newProjectFileName.size() > 0)
                         {
-                            projectCreateErrorLabel->set_name("Empty path given...");
+                            projectCreateErrorLabel->set_name("Path does not exist...");
                         }
                         else
                         {
-                            projectCreateErrorLabel->set_name("Path does not exist...");
+                            projectCreateErrorLabel->set_name("Empty path given...");
                         }
                     }
                     else
@@ -1032,41 +1061,59 @@ void GPE_Gui_Engine::launch_new_project()
                     projectCreateErrorLabel->set_name("Empty project name given...");
                 }
             }
-            else if( fileFind_button->is_clicked() )
+            else if (fileFind_button->is_clicked())
             {
-                foundFileName = pawgui::get_filename_save_from_popup("Create a New Project File","Game Pencil Projects",editor_gui_main->fileOpenProjectDir);
-                if( (int)foundFileName.size() > 0 )
+                foundFileName = pawgui::get_filename_save_from_popup("Create a New Project File", "Game Pencil Projects", editor_gui_main->fileOpenProjectDir);
+                if (foundFileName.size() > 0)
                 {
-                    newProjectFileName = foundFileName;
-                    fileToCreateField->set_name(foundFileName);
-                    if( matchProjectFileName!=nullptr && matchProjectFileName->is_clicked() )
+                    // Normalize the path by replacing backslashes with forward slashes on non-Windows systems
+                    std::string normalizedPath = foundFileName;
+                    #ifndef _WIN32
+                        std::replace(normalizedPath.begin(), normalizedPath.end(), '\\', '/');
+                    #else
+                        std::replace(normalizedPath.begin(), normalizedPath.end(), '/', '\\');
+                    #endif
+                    newProjectFileName = normalizedPath;
+                    fileToCreateField->set_name(newProjectFileName);
+                    if (matchProjectFileName != nullptr && matchProjectFileName->is_clicked())
                     {
-                        projectNameField->set_string( stg_ex::get_file_noext( stg_ex::get_local_from_global_file(foundFileName) ) );
+                        // Extract the filename without extension
+                        size_t lastSeparator = newProjectFileName.find_last_of("/\\");
+                        size_t lastDot = newProjectFileName.find_last_of('.');
+                        std::string filename;
+                        if (lastDot != std::string::npos && lastDot > lastSeparator)
+                        {
+                            filename = newProjectFileName.substr(lastSeparator + 1, lastDot - lastSeparator - 1);
+                        }
+                        else
+                        {
+                            filename = newProjectFileName.substr(lastSeparator + 1);
+                        }
+                        projectNameField->set_string(filename);
                     }
                 }
-
             }
 
-            //gpe::error_log->report("Rendering tip of the day");
-            gpe::renderer_main->reset_viewpoint( );
-            if( !gpe::window_controller_main->is_resized() )
+            // gpe::error_log->report("Rendering tip of the day");
+            gpe::renderer_main->reset_viewpoint();
+            if (!gpe::window_controller_main->is_resized())
             {
-                //if( gpe::input->window_input_received )
+                // if (gpe::input->window_input_received)
                 {
-                    pawgui::main_overlay_system->render_frozen_screenshot( );
+                    pawgui::main_overlay_system->render_frozen_screenshot();
                 }
-                //Update screen
-                gpe::gcanvas->render_rectangle( widget_box.x-4,widget_box.y-4,widget_box.x+widget_box.w+8,widget_box.y+widget_box.h+8, gpe::c_blgray,false,64);
-                gpe::gcanvas->render_rect( &widget_box,pawgui::theme_main->popup_box_color,false);
+                // Update screen
+                gpe::gcanvas->render_rectangle(widget_box.x - 4, widget_box.y - 4, widget_box.x + widget_box.w + 8, widget_box.y + widget_box.h + 8, gpe::c_blgray, false, 64);
+                gpe::gcanvas->render_rect(&widget_box, pawgui::theme_main->popup_box_color, false);
 
-                gpe::gcanvas->render_rectangle( widget_box.x,widget_box.y,widget_box.x+widget_box.w,widget_box.y+32,pawgui::theme_main->popup_box_highlight_color,false);
-                gpe::gcanvas->render_rect( &widget_box,pawgui::theme_main->button_box_highlight_color,true);
-                gpe::gfs->render_text( widget_box.x+widget_box.w/2,widget_box.y+pawgui::padding_default,popUpCaption,pawgui::theme_main->popup_box_highlight_font_color,gpe::font_default,gpe::fa_center,gpe::fa_top);
-                popupMenuList->render_self( );
-                //editor_gui_main-render_gui_info(renderer_main, true);
+                gpe::gcanvas->render_rectangle(widget_box.x, widget_box.y, widget_box.x + widget_box.w, widget_box.y + 32, pawgui::theme_main->popup_box_highlight_color, false);
+                gpe::gcanvas->render_rect(&widget_box, pawgui::theme_main->button_box_highlight_color, true);
+                gpe::gfs->render_text(widget_box.x + widget_box.w / 2, widget_box.y + pawgui::padding_default, popUpCaption, pawgui::theme_main->popup_box_highlight_font_color, gpe::font_default, gpe::fa_center, gpe::fa_top);
+                popupMenuList->render_self();
+                // editor_gui_main->render_gui_info(renderer_main, true);
 
-                gpe::gcanvas->render_rect( &widget_box,pawgui::theme_main->popup_box_border_color,true);
-                if( editor_gui_main!= nullptr )
+                gpe::gcanvas->render_rect(&widget_box, pawgui::theme_main->popup_box_border_color, true);
+                if (editor_gui_main != nullptr)
                 {
                     editor_gui_main->render_gui_info();
                 }
@@ -1076,26 +1123,35 @@ void GPE_Gui_Engine::launch_new_project()
 
         gpe::input->reset_all_input();
 
-        //Creates project if authorized to do so....
-        if( manualCancel==false && (int)newProjectFileName.size()> 0 )
+        // Creates project if authorized to do so....
+        if (!manualCancel && newProjectFileName.size() > 0)
         {
-            GPE_ProjectFolder * tPFolder = find_project_from_filename(newProjectFileName);
-            if(tPFolder==nullptr)
+            GPE_ProjectFolder* tPFolder = find_project_from_filename(newProjectFileName);
+            if (tPFolder == nullptr)
             {
-                std::string newProjectDir= stg_ex::get_path_from_file(newProjectFileName);
+                // Extract directory from newProjectFileName
+                size_t lastSeparator = newProjectFileName.find_last_of("/\\");
+                std::string newProjectDir = (lastSeparator != std::string::npos) ? newProjectFileName.substr(0, lastSeparator) : "";
+
+                // Extract local filename
                 std::string newProjectLocalFileName = stg_ex::get_local_from_global_file(newProjectFileName);
-                if( (int)newProjectLocalFileName.size()>0 && (int)newProjectName.size() > 0 )
+                if (newProjectLocalFileName.size() > 0 && newProjectName.size() > 0)
                 {
-                    std::string newProjectTitle = stg_ex::get_file_noext(newProjectLocalFileName);
-                    if( (int)newProjectTitle.size() > 0)
+                    // Extract title without extension
+                    size_t lastDot = newProjectLocalFileName.find_last_of('.');
+                    std::string newProjectTitle = (lastDot != std::string::npos) ? newProjectLocalFileName.substr(0, lastDot) : newProjectLocalFileName;
+                    if (newProjectTitle.size() > 0)
                     {
-                        newProjectFileName = newProjectDir+"/"+newProjectTitle+".gppf";
-                        newProjectDir = newProjectDir+"/"+newProjectTitle;
-                        setup_project_directory(newProjectDir);
-                        main_editor_log->log_general_line("Creating new Project["+newProjectName+"] at ["+newProjectFileName+"] location.");
-                        main_editor_log->log_general_line("Detected Language for new project: ["+newprojectLanguage->get_selected_tag() + "]." );
-                        GPE_ProjectFolder * newProject = new GPE_ProjectFolder(newProjectName,newProjectDir,newProjectFileName, newprojectLanguage->get_selected_tag(), true );
-                        pawgui::display_user_alert("Project Opened",newProjectFileName.c_str() );
+                        // Construct final paths
+                        std::string finalProjectFileName = join_paths(newProjectDir, newProjectTitle + ".gppf");
+                        std::string finalProjectDir = join_paths(newProjectDir, newProjectTitle);
+
+                        setup_project_directory(finalProjectDir);
+                        main_editor_log->log_general_line("Creating new Project[" + newProjectName + "] at [" + finalProjectFileName + "] location.");
+                        main_editor_log->log_general_line("Detected Language for new project: [" + newprojectLanguage->get_selected_tag() + "].");
+
+                        GPE_ProjectFolder* newProject = new GPE_ProjectFolder(newProjectName, finalProjectDir, finalProjectFileName, newprojectLanguage->get_selected_tag(), true);
+                        pawgui::display_user_alert("Project Opened", finalProjectFileName.c_str());
                         gpeProjects.push_back(newProject);
                         newProject->save_project();
                     }
@@ -1103,59 +1159,59 @@ void GPE_Gui_Engine::launch_new_project()
             }
         }
 
-        //Cleans up all of the UI elements.
-        if( popupMenuList!=nullptr)
+        // Cleans up all of the UI elements.
+        if (popupMenuList != nullptr)
         {
             delete popupMenuList;
             popupMenuList = nullptr;
         }
 
-        if( mainMenuLabel!=nullptr)
+        if (mainMenuLabel != nullptr)
         {
             delete mainMenuLabel;
             mainMenuLabel = nullptr;
         }
-        if( newprojectMainExport!=nullptr)
+        if (newprojectMainExport != nullptr)
         {
             delete newprojectMainExport;
             newprojectMainExport = nullptr;
         }
-        if( projectMainExportLabel!=nullptr)
+        if (projectMainExportLabel != nullptr)
         {
             delete projectMainExportLabel;
             projectMainExportLabel = nullptr;
         }
-        if( newprojectLanguage!=nullptr)
+        if (newprojectLanguage != nullptr)
         {
             delete newprojectLanguage;
             newprojectLanguage = nullptr;
         }
-        if( projectMainLanguageLabel!=nullptr)
+        if (projectMainLanguageLabel != nullptr)
         {
             delete projectMainLanguageLabel;
             projectMainLanguageLabel = nullptr;
         }
-        if( projectLocationLabel!=nullptr)
+        if (projectLocationLabel != nullptr)
         {
             delete projectLocationLabel;
             projectLocationLabel = nullptr;
         }
-        if( fileToCreateField!=nullptr)
+        if (fileToCreateField != nullptr)
         {
             delete fileToCreateField;
             fileToCreateField = nullptr;
         }
-        if( matchProjectFileName!=nullptr)
+        if (matchProjectFileName != nullptr)
         {
             delete matchProjectFileName;
             matchProjectFileName = nullptr;
         }
-        if( close_button!=nullptr)
+        if (close_button != nullptr)
         {
             delete close_button;
             close_button = nullptr;
         }
-        if( fileFind_button!=nullptr)
+        if (fileFind_button != nullptr)
         {
             delete fileFind_button;
             fileFind_button = nullptr;
