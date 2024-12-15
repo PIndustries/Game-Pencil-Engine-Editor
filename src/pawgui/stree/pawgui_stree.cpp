@@ -32,8 +32,8 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_stree.h"
-#include "pawgui_popups.h"
+#include "../stree/pawgui_stree.h"
+#include "../popups/pawgui_popups.h"
 
 namespace pawgui
 {

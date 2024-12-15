@@ -36,12 +36,12 @@ Contributors:
 #ifndef PAWGUI_SEARCH_CONTROLLER_H
 #define PAWGUI_SEARCH_CONTROLLER_H
 
-#include "pawgui_base.h"
-#include "pawgui_buttons.h"
-#include "pawgui_checkbox.h"
-#include "pawgui_dropdown.h"
-#include "pawgui_labels.h"
-#include "pawgui_text_input.h"
+#include "../base/pawgui_base.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../checkbox/pawgui_checkbox.h"
+#include "../dropdown/pawgui_dropdown.h"
+#include "../labels/pawgui_labels.h"
+#include "../text_input/pawgui_text_input.h"
 
 namespace pawgui
 {

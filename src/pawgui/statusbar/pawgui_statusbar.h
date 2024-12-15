@@ -35,7 +35,8 @@ Contributors:
 #ifndef PAWGUI_STATUS_BAR_H
 #define PAWGUI_STATUS_BAR_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
+
 
 namespace pawgui
 {

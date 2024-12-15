@@ -32,11 +32,11 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_base.h"
-#include "pawgui_buttons.h"
-#include "pawgui_labels.h"
-#include "pawgui_popups.h"
-#include "pawgui_text_input.h"
+#include "../base/pawgui_base.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../labels/pawgui_labels.h"
+#include "../popups/pawgui_popups.h"
+#include "../text_input/pawgui_text_input.h"
 
 namespace pawgui
 {

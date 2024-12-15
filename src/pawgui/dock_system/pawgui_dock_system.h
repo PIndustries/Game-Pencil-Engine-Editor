@@ -35,11 +35,11 @@ SOFTWARE.
 #ifndef PAWGUI_DOCK_SYSTEM_H
 #define PAWGUI_DOCK_SYSTEM_H
 
-#include "pawgui_resource_dropdown.h"
-#include "pawgui_general_resource.h"
-#include "pawgui_buttons.h"
-#include "pawgui_tab_basic.h"
-#include "pawgui_panel_list.h"
+#include "../resource_dropdown/pawgui_resource_dropdown.h"
+#include "../general_resource/pawgui_general_resource.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../tab_basic/pawgui_tab_basic.h"
+#include "../panel_list/pawgui_panel_list.h"
 
 namespace pawgui
 {

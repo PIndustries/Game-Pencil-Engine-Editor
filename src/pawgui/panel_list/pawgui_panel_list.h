@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_PANEL_LIST_H
 #define PAWGUI_PANEL_LIST_H
 
-#include "pawgui_scrollbars.h"
+#include "../scrollbars/pawgui_scrollbars.h"
 
 namespace pawgui
 {

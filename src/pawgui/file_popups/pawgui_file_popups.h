@@ -35,12 +35,12 @@ Contributors:
 #ifndef PAWGUI_FILE_POPUPS_H
 #define PAWGUI_FILE_POPUPS_H
 
-#include "pawgui_base.h"
-#include "pawgui_panel_list.h"
-#include "pawgui_buttons.h"
-#include "pawgui_dropdown.h"
-#include "pawgui_popups.h"
-#include "pawgui_text_input.h"
+#include "../base/pawgui_base.h"
+#include "../panel_list/pawgui_panel_list.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../dropdown/pawgui_dropdown.h"
+#include "../popups/pawgui_popups.h"
+#include "../text_input/pawgui_text_input.h"
 
 namespace pawgui
 {

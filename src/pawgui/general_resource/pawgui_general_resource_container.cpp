@@ -32,10 +32,10 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_general_resource_container.h"
-#include "pawgui_parsers.h"
-#include "pawgui_popups.h"
-#include "pawgui_tab_manager.h"
+#include "../general_resource/pawgui_general_resource_container.h"
+#include "../parsers/pawgui_parsers.h"
+#include "../popups/pawgui_popups.h"
+#include "../tab_manager/pawgui_tab_manager.h"
 
 namespace pawgui
 {

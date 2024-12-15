@@ -32,10 +32,10 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_text_input.h"
-#include "pawgui_buttons.h"
-#include "pawgui_color_picker.h"
-#include "pawgui_labels.h"
+#include "../text_input/pawgui_text_input.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../color_picker/pawgui_color_picker.h"
+#include "../labels/pawgui_labels.h"
 
 namespace pawgui
 {

@@ -35,8 +35,8 @@ Contributors:
 #ifndef PAWGUI_RADIOBUTTONS_H
 #define PAWGUI_RADIOBUTTONS_H
 
-#include "pawgui_base.h"
-#include "pawgui_parsers.h"
+#include "../base/pawgui_base.h"
+#include "../parsers/pawgui_parsers.h"
 
 namespace pawgui
 {

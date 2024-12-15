@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_OVERLAY_SYSTEM_H
 #define PAWGUI_OVERLAY_SYSTEM_H
 
-#include "pawgui_themes.h"
+#include "../themes/pawgui_themes.h"
 
 namespace pawgui
 {

@@ -32,11 +32,11 @@ SOFTWARE.
 #ifndef PAWGUI_BASE_H
 #define PAWGUI_BASE_H
 
-#include "pawgui_constants.h"
-#include "pawgui_globals.h"
-#include "pawgui_settings.h"
-#include "pawgui_themes.h"
-#include "pawgui_overlay.h"
+#include "../constants/pawgui_constants.h"
+#include "../globals/pawgui_globals.h"
+#include "../settings/pawgui_settings.h"
+#include "../themes/pawgui_themes.h"
+#include "../overlay/pawgui_overlay.h"
 
 namespace pawgui
 {

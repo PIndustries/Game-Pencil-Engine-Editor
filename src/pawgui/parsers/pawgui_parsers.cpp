@@ -32,8 +32,8 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_parsers.h"
-#include "pawgui_themes.h"
+#include "../parsers/pawgui_parsers.h"
+#include "../themes/pawgui_themes.h"
 
 namespace pawgui
 {

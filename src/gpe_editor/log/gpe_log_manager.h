@@ -34,7 +34,7 @@ SOFTWARE.
 #ifndef GPE_EDITOR_LOGS_H
 #define GPE_EDITOR_LOGS_H
 
-#include "../pawgui/pawgui.h"
+#include "../pawgui/pawgui/pawgui.h"
 
 class log_manager: public pawgui::widget_basic
 {

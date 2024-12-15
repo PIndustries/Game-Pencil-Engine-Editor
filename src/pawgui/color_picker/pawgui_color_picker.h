@@ -36,7 +36,7 @@ Contributors:
 #ifndef PAWGUI_COLOR_PICKER_H
 #define PAWGUI_COLOR_PICKER_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

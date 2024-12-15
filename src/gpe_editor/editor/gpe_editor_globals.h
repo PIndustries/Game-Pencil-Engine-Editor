@@ -34,8 +34,8 @@ SOFTWARE.
 #ifndef gpe_editor_globals_h
 #define gpe_editor_globals_h
 
-#include "../pawgui/pawgui_theme_controller.h"
-#include "../pawgui/pawgui_dock_system.h"
+#include "../../pawgui/theme_controller/pawgui_theme_controller.h"
+#include "../../pawgui/dock_system/pawgui_dock_system.h"
 #include "gpe_editor_splash_page.h"
 
 extern int release_current_mode;

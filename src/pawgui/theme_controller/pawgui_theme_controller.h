@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_THEME_CONTROLLER_H
 #define PAWGUI_THEME_CONTROLLER_H
 
-#include "pawgui_themes.h"
+#include "../themes/pawgui_themes.h"
 
 namespace pawgui
 {

@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_TEXT_URL_H
 #define PAWGUI_TEXT_URL_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

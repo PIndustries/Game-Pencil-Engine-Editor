@@ -36,8 +36,8 @@ Contributors:
 #ifndef PAWGUI_INPUT_TEXT_H
 #define PAWGUI_INPUT_TEXT_H
 
-#include "pawgui_base.h"
-#include "pawgui_context.h"
+#include "../base/pawgui_base.h"
+#include "../context/pawgui_context.h"
 
 namespace pawgui
 {

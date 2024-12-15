@@ -37,7 +37,7 @@ SOFTWARE.
 
 #include "../resources/basic/gpe_basic_resource_page.h"
 #include "../editor/gpe_editor_globals.h"
-#include "../pawgui/pawgui_stree.h"
+#include "../pawgui/stree/pawgui_stree.h"
 
 //Basic Scene Editing Modes
 const int SCENE_MODE_NONE = -1;

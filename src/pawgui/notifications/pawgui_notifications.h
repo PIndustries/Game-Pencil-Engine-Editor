@@ -35,7 +35,7 @@ Contributors:
 #ifndef pawgui_notificatons_h
 #define pawgui_notificatons_h
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

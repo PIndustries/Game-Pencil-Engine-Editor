@@ -33,7 +33,7 @@ SOFTWARE.
 #ifndef PAWGUI_CONTENT_SELECTOR_H
 #define PAWGUI_CONTENT_SELECTOR_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

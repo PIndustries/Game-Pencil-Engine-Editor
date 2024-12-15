@@ -32,12 +32,12 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_context.h"
-#include "pawgui_file_popups.h"
-#include "pawgui_general_resource_container.h"
-#include "pawgui_search_controller.h"
-#include "pawgui_statusbar.h"
-#include "pawgui_text_editor.h"
+#include "../context/pawgui_context.h"
+#include "../file_popups/pawgui_file_popups.h"
+#include "../general_resource/pawgui_general_resource_container.h"
+#include "../search_controller/pawgui_search_controller.h"
+#include "../statusbar/pawgui_statusbar.h"
+#include "../text_editor/pawgui_text_editor.h"
 
 namespace pawgui
 {

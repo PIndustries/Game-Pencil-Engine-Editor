@@ -35,7 +35,7 @@ SOFTWARE.
 
 #include <string>
 #include "../gpe/gpe.h"
-#include "../pawgui/pawgui.h"
+#include "../pawgui/pawgui/pawgui.h"
 
 class gpe_splash_page
 {

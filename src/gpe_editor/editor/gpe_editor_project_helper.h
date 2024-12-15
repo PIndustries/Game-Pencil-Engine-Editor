@@ -39,7 +39,7 @@ SOFTWARE.
 #include "../gpe/gpe_file_system.h"
 #include "../gpe/gpe_globals.h"
 #include "../gpe/gpe.h"
-#include "../pawgui/pawgui_popups.h"
+#include "../pawgui/popups/pawgui_popups.h"
 #include "gpe_editor_constants.h"
 #include "../editor/gpe_editor_globals.h"
 

@@ -36,8 +36,8 @@ Contributors:
 #define PAWGUI_THEMES_H
 
 #include "../gpe/gpe.h"
-#include "pawgui_constants.h"
-#include "pawgui_globals.h"
+#include "../constants/pawgui_constants.h"
+#include "../globals/pawgui_globals.h"
 
 namespace pawgui
 {

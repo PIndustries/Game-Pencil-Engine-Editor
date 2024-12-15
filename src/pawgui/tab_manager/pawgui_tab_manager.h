@@ -35,9 +35,9 @@ Contributors:
 #ifndef PAWGUI_TAB_RESOURCEBAR_H
 #define PAWGUI_TAB_RESOURCEBAR_H
 
-#include "pawgui_base.h"
-#include "pawgui_buttons.h"
-#include "pawgui_general_resource.h"
+#include "../base/pawgui_base.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../general_resource/pawgui_general_resource.h"
 
 namespace pawgui
 {

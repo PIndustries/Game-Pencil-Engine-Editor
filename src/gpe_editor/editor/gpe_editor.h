@@ -34,9 +34,9 @@ SOFTWARE.
 #ifndef GPE_EDITOR_H
 #define GPE_EDITOR_H
 
-#include "../pawgui/pawgui.h"
-#include "pawgui/pawgui_resource_dropdown.h"
-#include "pawgui/pawgui_dock_system.h"
+#include "../pawgui/pawgui/pawgui.h"
+#include "../pawgui/resource_dropdown/pawgui_resource_dropdown.h"
+#include "../pawgui/dock_system/pawgui_dock_system.h"
 
 #include "gpe_editor_constants.h"
 #include "../editor/gpe_editor_globals.h"

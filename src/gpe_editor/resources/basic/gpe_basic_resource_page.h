@@ -35,10 +35,10 @@ SOFTWARE.
 #ifndef GPE_BASIC_project_RESOURCE_H
 #define GPE_BASIC_project_RESOURCE_H
 
-#include "../gpe/gpe_render_package_handler.h"
-#include "../pawgui/pawgui_dock_system.h"
-#include "../pawgui/pawgui_general_resource.h"
-#include "../pawgui/pawgui.h"
+#include "../../gpe/gpe_render_package_handler.h"
+#include "../../pawgui/dock_system/pawgui_dock_system.h"
+#include "../../pawgui/general_resource/pawgui_general_resource.h"
+#include "../../pawgui/pawgui/pawgui.h"
 
 
 #include "../../editor/gpe_editor_globals.h"

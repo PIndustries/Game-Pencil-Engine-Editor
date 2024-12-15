@@ -35,12 +35,12 @@ Contributors:
 #ifndef PAWGUI_TEXT_EDITOR_H
 #define PAWGUI_TEXT_EDITOR_H
 
-#include "pawgui_syntax_handler.h"
-#include "pawgui_base.h"
-#include "pawgui_buttons.h"
-#include "pawgui_labels.h"
-#include "pawgui_parsers.h"
-#include "pawgui_scrollbars.h"
+#include "../syntax_handler/pawgui_syntax_handler.h"
+#include "../base/pawgui_base.h"
+#include "../buttons/pawgui_buttons.h"
+#include "../labels/pawgui_labels.h"
+#include "../parsers/pawgui_parsers.h"
+#include "../scrollbars/pawgui_scrollbars.h"
 
 namespace pawgui
 {

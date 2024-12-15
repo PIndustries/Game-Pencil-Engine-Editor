@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_LABELS_H
 #define PAWGUI_LABELS_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

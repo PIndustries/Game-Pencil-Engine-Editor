@@ -34,9 +34,9 @@ Contributors:
 #ifndef PAWGUI_SELECTBOX_H
 #define PAWGUI_SELECTBOX_H
 
-#include "pawgui_base.h"
-#include "pawgui_parsers.h"
-#include "pawgui_scrollbars.h"
+#include "../base/pawgui_base.h"
+#include "../parsers/pawgui_parsers.h"
+#include "../scrollbars/pawgui_scrollbars.h"
 
 namespace pawgui
 {

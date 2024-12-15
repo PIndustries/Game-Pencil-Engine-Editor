@@ -35,7 +35,8 @@ Contributors:
 #ifndef PAWGUI_SLIDERS_H
 #define PAWGUI_SLIDERS_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
+
 
 namespace pawgui
 {

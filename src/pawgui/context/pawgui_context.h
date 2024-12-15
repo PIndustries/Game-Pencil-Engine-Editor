@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_CONTEXT_H
 #define PAWGUI_CONTEXT_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

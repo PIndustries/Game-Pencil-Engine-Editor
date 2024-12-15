@@ -35,7 +35,7 @@ Contributors:
 #ifndef PAWGUI_TAB_BASIC_H
 #define PAWGUI_TAB_BASIC_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

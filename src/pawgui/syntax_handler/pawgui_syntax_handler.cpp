@@ -31,8 +31,8 @@ Contributors:
 - PawByte Ambitious Working GUI(PAWGUI) <https://www.pawbyte.com/pawgui>
 - P Industries <https://p.industries>
 */
-#include "pawgui_syntax_handler.h"
-#include "pawgui_themes.h"
+#include "../syntax_handler/pawgui_syntax_handler.h"
+#include "../themes/pawgui_themes.h"
 
 namespace pawgui
 {

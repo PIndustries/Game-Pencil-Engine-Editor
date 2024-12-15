@@ -34,7 +34,7 @@ SOFTWARE.
 #ifndef GPE_RESOURCE_TREE_H
 #define GPE_RESOURCE_TREE_H
 
-#include "../pawgui/pawgui.h"
+#include "../../pawgui/pawgui/pawgui.h"
 
 extern int resourcetype_last_rendered_type;
 

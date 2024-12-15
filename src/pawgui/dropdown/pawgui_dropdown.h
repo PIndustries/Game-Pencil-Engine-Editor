@@ -32,9 +32,9 @@ SOFTWARE.
 #ifndef PAWGUI_DROPDOWN_H
 #define PAWGUI_DROPDOWN_H
 
-#include "pawgui_base.h"
-#include "pawgui_parsers.h"
-#include "pawgui_context.h"
+#include "../base/pawgui_base.h"
+#include "../parsers/pawgui_parsers.h"
+#include "../context/pawgui_context.h"
 #include "../gpe/gpe_parser.h"
 
 namespace pawgui

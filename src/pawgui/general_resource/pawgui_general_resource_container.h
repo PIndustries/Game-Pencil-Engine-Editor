@@ -35,8 +35,8 @@ Contributors:
 #ifndef PAWGUI_GRC_H
 #define PAWGUI_GRC_H
 
-#include "pawgui_base.h"
-#include "pawgui_general_resource.h"
+#include "../base/pawgui_base.h"
+#include "../general_resource/pawgui_general_resource.h"
 
 namespace pawgui
 {

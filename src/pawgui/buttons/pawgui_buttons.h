@@ -35,7 +35,7 @@ SOFTWARE.
 #ifndef PAWGUI_BUTTONS_H
 #define PAWGUI_BUTTONS_H
 
-#include "pawgui_base.h"
+#include "../base/pawgui_base.h"
 
 namespace pawgui
 {

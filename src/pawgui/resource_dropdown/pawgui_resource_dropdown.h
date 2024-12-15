@@ -35,9 +35,9 @@ Contributors:
 #ifndef PAWGUI_RESOURCE_DROPDOWN_H
 #define PAWGUI_RESOURCE_DROPDOWN_H
 
-#include "pawgui_base.h"
-#include "pawgui_context.h"
-#include "pawgui_general_resource_container.h"
+#include "../base/pawgui_base.h"
+#include "../context/pawgui_context.h"
+#include "../general_resource/pawgui_general_resource_container.h"
 
 namespace pawgui
 {

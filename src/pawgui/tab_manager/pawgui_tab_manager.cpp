@@ -32,9 +32,9 @@ Contributors:
 - P Industries <https://p.industries>
 */
 
-#include "pawgui_tab_manager.h"
-#include "pawgui_search_controller.h"
-#include "pawgui_text_editor.h"
+#include "../tab_manager/pawgui_tab_manager.h"
+#include "../search_controller/pawgui_search_controller.h"
+#include "../text_editor/pawgui_text_editor.h"
 
 namespace pawgui
 {
